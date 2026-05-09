@@ -1,0 +1,35 @@
+/* Refined Smooth Dropdown Animation for Packages */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: block !important;
+    visibility: hidden;
+    opacity: 0;
+    margin-top: 0 !important;
+    transform: translateY(5px) scale(0.98);
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.2s;
+    pointer-events: none;
+    min-width: 100%;
+    right: 0;
+    left: auto;
+}
+
+.dropdown-menu.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+/* Fix for horizontal scroll without breaking the closing animation */
+body {
+    overflow-x: hidden;
+}
+
+/* Ensure the menu stays in place while fading out */
+.dropdown-menu:not(.show) {
+    transition: opacity 0.15s ease-out, transform 0.15s ease-out, visibility 0.15s;
+    pointer-events: none;
+}

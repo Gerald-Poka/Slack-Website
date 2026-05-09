@@ -11,4 +11,8 @@ return [
     App\Modules\Settings\SettingsServiceProvider::class,
     App\Modules\Auth\AuthServiceProvider::class,
     App\Modules\Plugin\PluginServiceProvider::class,
+    App\Modules\Navigation\NavigationServiceProvider::class,
+    App\Modules\Forms\FormsServiceProvider::class,
+    App\Modules\Audit\AuditServiceProvider::class,
+    App\Modules\SEO\SEOServiceProvider::class,
 ];

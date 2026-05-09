@@ -27,39 +27,61 @@
         <div class="sidebar-section">
             <ul class="nav nav-sidebar" data-nav-type="accordion">
 
-                <!-- Main -->
-                <li class="nav-item-header pt-0">
-                    <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Main</div>
-                    <i class="ph-dots-three sidebar-resize-show"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('/') }}" class="nav-link active">
-                        <i class="ph-house"></i>
-                        <span>
-                            Dashboard
-                            <span class="d-block fw-normal opacity-50">Home Page</span>
-                        </span>
-                    </a>
-                </li>
+                @php $activePackage = session('active_package', 'core/cms'); @endphp
 
-                <!-- Layout -->
-                <li class="nav-item-header">
-                    <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Layout</div>
-                    <i class="ph-dots-three sidebar-resize-show"></i>
-                </li>
-                <li class="nav-item nav-item-submenu">
-                    <a href="#" class="nav-link">
-                        <i class="ph-layout"></i>
-                        <span>Page layouts</span>
-                    </a>
+                <!-- CMS Package Links -->
+                @if($activePackage == 'core/cms')
+                    <li class="nav-item-header pt-0">
+                        <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Content Management</div>
+                        <i class="ph-dots-three sidebar-resize-show"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="ph-files"></i>
+                            <span>Pages</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="ph-newspaper"></i>
+                            <span>CMS Posts</span>
+                        </a>
+                    </li>
+                @endif
 
-                    <ul class="nav-group-sub collapse">
-                        <li class="nav-item"><a href="#" class="nav-link">Static layout</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">No header</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">No footer</a></li>
-                    </ul>
-                </li>
-                <!-- /layout -->
+                <!-- Admin Package Links -->
+                @if($activePackage == 'core/admin')
+                    <li class="nav-item-header pt-0">
+                        <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">System Administration</div>
+                        <i class="ph-dots-three sidebar-resize-show"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="ph-users"></i>
+                            <span>Users & Roles</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="ph-palette"></i>
+                            <span>Themes</span>
+                        </a>
+                    </li>
+                @endif
+
+                <!-- Developer Package Links -->
+                @if($activePackage == 'core/developer')
+                    <li class="nav-item-header pt-0">
+                        <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Developer Tools</div>
+                        <i class="ph-dots-three sidebar-resize-show"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="ph-plugs-connected"></i>
+                            <span>Plugins</span>
+                        </a>
+                    </li>
+                @endif
 
             </ul>
         </div>

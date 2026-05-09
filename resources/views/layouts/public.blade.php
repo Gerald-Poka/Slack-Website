@@ -10,38 +10,39 @@
 	<link href="{{ asset('assets/fonts/inter/inter.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/icons/phosphor/styles.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('full-assets/css/ltr/all.min.css') }}" id="stylesheet" rel="stylesheet" type="text/css">
-	<link href="{{ asset('assets/css/package.css') }}" rel="stylesheet" type="text/css">
-	<!-- /global stylesheets -->
 
 	<!-- Core JS files -->
-	<script src="{{ asset('assets/demo/demo_configurator.js') }}"></script>
 	<script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
-	<!-- /core JS files -->
-
-	<!-- Theme JS files -->
-	<script src="{{ asset('assets/js/vendor/visualization/d3/d3.min.js') }}"></script>
-	<script src="{{ asset('assets/js/vendor/visualization/d3/d3_tooltip.js') }}"></script>
-
 	<script src="{{ asset('full-assets/js/app.js') }}"></script>
-	@stack('scripts')
-	<!-- /theme JS files -->
-
 </head>
 
-<body>
+<body class="bg-slate-50">
 
 	<!-- Main navbar -->
-	@include('layouts.navbar')
+	<div class="navbar navbar-dark navbar-expand-lg navbar-static border-bottom border-bottom-white border-opacity-10">
+		<div class="container">
+			<div class="navbar-brand flex-1 flex-lg-0">
+				<a href="{{ url('/') }}" class="d-inline-flex align-items-center">
+					<span class="fs-4 fw-bold text-white text-uppercase ls-1">Slack Website</span>
+				</a>
+			</div>
+
+			<ul class="nav flex-row justify-content-end order-1 order-lg-2">
+				<li class="nav-item">
+					@auth
+						<a href="{{ route('dashboard') }}" class="btn btn-yellow btn-sm rounded-pill px-3">Dashboard</a>
+					@else
+						<a href="{{ route('login') }}" class="btn btn-outline-white btn-sm rounded-pill px-3">Login</a>
+					@endauth
+				</li>
+			</ul>
+		</div>
+	</div>
 	<!-- /main navbar -->
 
 
 	<!-- Page content -->
 	<div class="page-content">
-
-		<!-- Main sidebar -->
-		@include('layouts.sidebar')
-		<!-- /main sidebar -->
-
 
 		<!-- Main content -->
 		<div class="content-wrapper">
@@ -49,20 +50,18 @@
 			<!-- Inner content -->
 			<div class="content-inner">
 
-				<!-- Page header -->
-				@include('layouts.page_header')
-				<!-- /page header -->
-
-
 				<!-- Content area -->
-				<div class="content">
+				<div class="content container mt-4">
                     @yield('content')
 				</div>
 				<!-- /content area -->
 
-
 				<!-- Footer -->
-				@include('layouts.footer')
+				<footer class="footer container mt-auto py-3">
+					<div class="text-center text-muted">
+						&copy; {{ date('Y') }} Slack Website. All rights reserved.
+					</div>
+				</footer>
 				<!-- /footer -->
 
 			</div>
@@ -73,11 +72,6 @@
 
 	</div>
 	<!-- /page content -->
-
-
-	<!-- Notifications -->
-    @include('layouts.notifications')
-	<!-- /notifications -->
 
 </body>
 </html>
