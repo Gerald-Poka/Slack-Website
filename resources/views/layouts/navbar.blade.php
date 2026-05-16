@@ -9,7 +9,10 @@
 
         <div class="navbar-brand flex-1 flex-lg-0">
             <a href="{{ url('/') }}" class="d-inline-flex align-items-center">
-                <span class="fs-4 fw-bold text-white text-uppercase ls-1">Slack Website</span>
+                @if(setting('site_logo'))
+                    <img src="{{ setting('site_logo') }}" class="h-32px me-2" alt="{{ setting('site_name', 'Slack Website') }}">
+                @endif
+                <span class="fs-4 fw-bold text-white text-uppercase ls-1">{{ setting('site_name', 'Slack Website') }}</span>
             </a>
         </div>
 

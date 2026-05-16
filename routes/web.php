@@ -32,6 +32,19 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         session(['active_package' => $request->package]);
         return back();
     })->name('admin.switch_package');
+
+    // Settings Routes
+    Route::get('/settings', [\App\Modules\Settings\Controllers\SettingsController::class, 'index'])->name('admin.settings.index');
+    Route::post('/settings', [\App\Modules\Settings\Controllers\SettingsController::class, 'update'])->name('admin.settings.update');
+
+    // Theme Routes
+    Route::get('/theme', [\App\Modules\Settings\Controllers\ThemeController::class, 'index'])->name('admin.theme.index');
+    Route::post('/theme', [\App\Modules\Settings\Controllers\ThemeController::class, 'update'])->name('admin.theme.update');
+
+    // Page Builder Routes
+    Route::get('/pagebuilder', [\App\Modules\Settings\Controllers\PageBuilderController::class, 'index'])->name('admin.pagebuilder.index');
+    Route::get('/pagebuilder/{id}', [\App\Modules\Settings\Controllers\PageBuilderController::class, 'edit'])->name('admin.pagebuilder.edit');
+    Route::post('/pagebuilder/{id}/add-section', [\App\Modules\Settings\Controllers\PageBuilderController::class, 'addSection'])->name('admin.pagebuilder.add_section');
     
     // Placeholder routes for other roles
     Route::get('/editor', function() { return "Editor Dashboard"; })->name('editor');

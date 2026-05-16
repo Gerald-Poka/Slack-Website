@@ -29,16 +29,16 @@
 
                 @php $activePackage = session('active_package', 'core/cms'); @endphp
 
-                <!-- CMS Package Links -->
+                <!-- 1. CMS PACKAGE SIDEBAR -->
                 @if($activePackage == 'core/cms')
-                    <li class="nav-item-header pt-0">
+                    <li class="nav-item-header">
                         <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Content Management</div>
                         <i class="ph-dots-three sidebar-resize-show"></i>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="ph-files"></i>
-                            <span>Pages</span>
+                            <i class="ph-image"></i>
+                            <span>Media Manager</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -47,12 +47,56 @@
                             <span>CMS Posts</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="ph-globe"></i>
+                            <span>SEO Management</span>
+                        </a>
+                    </li>
                 @endif
 
-                <!-- Admin Package Links -->
-                @if($activePackage == 'core/admin')
-                    <li class="nav-item-header pt-0">
-                        <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">System Administration</div>
+                <!-- 2. SETTINGS PACKAGE SIDEBAR -->
+                @if($activePackage == 'core/settings')
+                    <li class="nav-item-header">
+                        <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">System Setup</div>
+                        <i class="ph-dots-three sidebar-resize-show"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.settings.index') }}" class="nav-link">
+                            <i class="ph-gear"></i>
+                            <span>General Identity</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.theme.index') }}" class="nav-link">
+                            <i class="ph-palette"></i>
+                            <span>Theme Customizer</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.pagebuilder.index') }}" class="nav-link">
+                            <i class="ph-layout"></i>
+                            <span>Page Builder</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="ph-list"></i>
+                            <span>Navigation Menus</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="ph-note-pencil"></i>
+                            <span>Form Builder</span>
+                        </a>
+                    </li>
+                @endif
+
+                <!-- 3. AUTH PACKAGE SIDEBAR -->
+                @if($activePackage == 'core/auth')
+                    <li class="nav-item-header">
+                        <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Security & Access</div>
                         <i class="ph-dots-three sidebar-resize-show"></i>
                     </li>
                     <li class="nav-item">
@@ -63,22 +107,14 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="ph-palette"></i>
-                            <span>Themes</span>
+                            <i class="ph-shield-check"></i>
+                            <span>Audit Logs</span>
                         </a>
-                    </li>
-                @endif
-
-                <!-- Developer Package Links -->
-                @if($activePackage == 'core/developer')
-                    <li class="nav-item-header pt-0">
-                        <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Developer Tools</div>
-                        <i class="ph-dots-three sidebar-resize-show"></i>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="ph-plugs-connected"></i>
-                            <span>Plugins</span>
+                            <i class="ph-lock-key"></i>
+                            <span>Security Settings</span>
                         </a>
                     </li>
                 @endif

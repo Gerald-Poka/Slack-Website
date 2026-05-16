@@ -13,6 +13,32 @@
 	<link href="{{ asset('assets/css/package.css') }}" rel="stylesheet" type="text/css">
 	<!-- /global stylesheets -->
 
+    <style>
+        :root {
+            --primary-color: {{ setting('primary_color', '#2196F3') }};
+            --secondary-color: {{ setting('secondary_color', '#263238') }};
+            --heading-font: '{{ setting('heading_font', 'Inter') }}', sans-serif;
+            --body-font: '{{ setting('body_font', 'Inter') }}', sans-serif;
+        }
+
+        body {
+            font-family: var(--body-font);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--heading-font);
+        }
+
+        .btn-primary, .bg-primary, .nav-sidebar .nav-item.active > .nav-link {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+        }
+
+        .text-primary {
+            color: var(--primary-color) !important;
+        }
+    </style>
+
 	<!-- Core JS files -->
 	<script src="{{ asset('assets/demo/demo_configurator.js') }}"></script>
 	<script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>

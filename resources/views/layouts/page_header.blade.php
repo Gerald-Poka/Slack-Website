@@ -18,7 +18,7 @@
             <div class="d-lg-flex mb-2 mb-lg-0">
                 @php
                     $activePackage = session('active_package', 'core/cms');
-                    $dbPackages = \App\Modules\Plugin\Models\Plugin::where('status', 'active')->get();
+                    $dbPackages = \App\Modules\Settings\Models\Plugin::where('status', 'active')->get();
                     
                     // Find the active package details
                     $currentPackage = $dbPackages->where('name', $activePackage)->first() ?? $dbPackages->first();

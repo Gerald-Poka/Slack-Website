@@ -3,45 +3,49 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Modules\Plugin\Models\Plugin;
+use App\Modules\Settings\Models\Plugin;
 
 class PluginSeeder extends Seeder
 {
     public function run()
     {
-        $modulesPath = app_path('Modules');
-        $modules = array_filter(glob($modulesPath . '/*'), 'is_dir');
+        // Define only the 3 main "Workspace" packages
+        $mainPackages = [
+            [
+                'name' => 'core/cms',
+                'label' => 'Content Center (CMS)',
+                'icon' => 'ph-newspaper',
+                'version' => '1.0.0',
+                'entry_class' => 'App\Modules\CMS\CMSServiceProvider',
+                'status' => 'active',
+            ],
+            [
+                'name' => 'core/settings',
+                'label' => 'System Architect (Settings)',
+                'icon' => 'ph-gear',
+                'version' => '1.0.0',
+                'entry_class' => 'App\Modules\Settings\SettingsServiceProvider',
+                'status' => 'active',
+            ],
+            [
+                'name' => 'core/auth',
+                'label' => 'Control Center (Security)',
+                'icon' => 'ph-shield-check',
+                'version' => '1.0.0',
+                'entry_class' => 'App\Modules\Auth\AuthServiceProvider',
+                'status' => 'active',
+            ],
+        ];
 
-        foreach ($modules as $modulePath) {
-            $moduleName = basename($modulePath);
+        foreach ($mainPackages as $pkg) {
+            Plugin::updateOrCreate(['name' => $pkg['name']], $pkg);
             
-            // Standardize icons for core modules
-            $icons = [
-                'CMS' => 'ph-newspaper',
-                'Auth' => 'ph-lock',
-                'Media' => 'ph-image',
-                'PageBuilder' => 'ph-layout',
-                'Settings' => 'ph-gear',
-                'Theme' => 'ph-palette',
-                'SEO' => 'ph-globe',
-                'Forms' => 'ph-note-pencil',
-                'Audit' => 'ph-list-checks',
-                'Navigation' => 'ph-list',
-            ];
-
-            $plugin = Plugin::updateOrCreate(
-                ['name' => 'core/' . strtolower($moduleName)],
-                [
-                    'label' => $moduleName,
-                    'icon' => $icons[$moduleName] ?? 'ph-package',
-                    'version' => '1.0.0',
-                    'entry_class' => "App\\Modules\\{$moduleName}\\{$moduleName}ServiceProvider",
-                    'status' => 'active',
-                ]
-            );
-
-            // Create a permission for this package if it doesn't exist
-            \Spatie\Permission\Models\Permission::findOrCreate('access module ' . strtolower($moduleName));
+            // Create a permission for this package
+            $slug = str_replace('core/', '', $pkg['name']);
+            \Spatie\Permission\Models\Permission::findOrCreate('access module ' . $slug);
         }
+
+        // Clean up: Deactivate any other modules that were previously registered as packages
+        Plugin::whereNotIn('name', array_column($mainPackages, 'name'))->delete();
     }
 }
